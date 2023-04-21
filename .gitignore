@@ -136,4 +136,6 @@ dmypy.json
 .vscode
 
 # Data 
-data/
+data/final
+data/processed
+data/raw/kickstarter.csv
