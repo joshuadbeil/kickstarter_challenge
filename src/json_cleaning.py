@@ -17,19 +17,20 @@ def extract_dict_columns(df, column, keys):
     return df
 
 
-def process_dataframe(input_df):
+def json_cleaning(input_df, dict_columns):
     # Make a copy of the input DataFrame to avoid modifying the original one
     df = input_df.copy()
 
     # List of column names containing dictionaries and/or JSON strings
-    dict_columns = [
+
+    """dict_columns = [
         "creator",
         "category",
         "location",
         "photo",
         "profile",
         "urls",
-    ]
+    ]"""
 
     # Convert JSON strings to dictionaries for each column in dict_columns
     for column in dict_columns:
@@ -38,7 +39,7 @@ def process_dataframe(input_df):
         )
 
     # Define the keys to be extracted for each JSON-like column
-    json_columns = {
+    all_json_columns = {
         # "creator": [
         # "name",
         # "chosen_currency",
@@ -101,6 +102,13 @@ def process_dataframe(input_df):
         # "link_url",
         # ],
         # "urls": ["api", "web"],
+    }
+
+    # Filter the json_columns dictionary to only include the keys for columns_to_process
+    json_columns = {
+        column: all_json_columns[column]
+        for column in dict_columns
+        if column in all_json_columns
     }
 
     # Extract the keys for each JSON-like column and create new columns
