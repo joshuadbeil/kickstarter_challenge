@@ -55,6 +55,14 @@ source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
+---
+## Data Merge
+
+The original raw data can be found in 'data/raw/' and is split up into 56 different *.csv files. You can run the following script to merge it and create a new 'kickstarter.csv' with all 209222 rows.
+
+```Bash
+python src/import.py
+```
 
 ## Usage
 
