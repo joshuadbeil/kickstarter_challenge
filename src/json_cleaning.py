@@ -1,3 +1,22 @@
+import pandas as pd
+import json
+
+
+def safe_string_to_dict(s):
+    try:
+        return json.loads(s)
+    except (TypeError, ValueError):
+        return s
+
+
+def extract_dict_columns(df, column, keys):
+    for key in keys:
+        df[f"{column}_{key}"] = df[column].apply(
+            lambda x: x.get(key) if isinstance(x, dict) else None
+        )
+    return df
+
+
 def process_dataframe(input_df):
     # Make a copy of the input DataFrame to avoid modifying the original one
     df = input_df.copy()
