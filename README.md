@@ -1,8 +1,42 @@
-# Template Repo for ML Project
-
-This template repo will give you a good starting point for your second project. Besides the files used for creating a virtual environment, you will find a simple example of how to build a simple model in a python script. This is maybe the simplest way to do it. We train a simple model in the jupyter notebook, where we select only some features and do minimal cleaning. The output is then stored in simple python scripts.
-
-The data used for this is: [coffee quality dataset](https://github.com/jldbc/coffee-quality-database).
+| Index | Variable                | Description                                                                                                                   |		
+|-------|------------------------|-------------------------------------------------------------------------------------------------------------------------------|		
+|	0	|	backers_count	|	number of people that backed the project
+|	1	|	blurb	|	short description of the project
+|	2	|	category	|	category and parent category of the project: id, name, slug, position, parent_id, color, urls
+|	3	|	converted_pledged_amount	|	pledged amount converted to USD
+|	4	|	country	|	creator's country of origin
+|	5	|	created_at	|	date the project was created
+|	6	|	creator	|	dictionary with information about the creator: id, name, is_registered, chosen_currency, avatar, urls:web:user (user profile)
+|	7	|	currency	|	the projects original currency
+|	8	|	currency_symbol	|	symbol for that, (can be dropped because its colinear with currency)
+|	9	|	currency_trailing_code	|	???
+|	10	|	current_currency	|	???
+|	11	|	deadline	|	deadline for when the project needs to be financed
+|	12	|	disable_communication	|	maybe if comments are turned off?
+|	13	|	friends	|	friends, is_backing, is_starred, permissions appear to be perfectly colinear. CHECK WHAT THATS ABOUT
+|	14	|	fx_rate	|	some currency conversion rate between USD and 'currency'
+|	15	|	goal	|	funding goal in the currency of 'currency'
+|	16	|	id	|	project id
+|	17	|	is_backing	|	friends, is_backing, is_starred, permissions appear to be perfectly colinear. CHECK WHAT THATS ABOUT
+|	18	|	is_starrable	|	boolean value if project could potentially be starred
+|	19	|	is_starred	|	friends, is_backing, is_starred, permissions appear to be perfectly colinear. CHECK WHAT THATS ABOUT
+|	20	|	launched_at	|	date the project was launched
+|	21	|	location	|	project's location of origin (dictionary needs to be decoded)
+|	22	|	name	|	name of the project
+|	23	|	permissions	|	friends, is_backing, is_starred, permissions appear to be perfectly colinear. CHECK WHAT THATS ABOUT
+|	24	|	photo	|	photo of the project: IS THERE ONLY ONE OR ARE THERE MULTIPLE IN THE DICTIONARY?
+|	25	|	pledged	|	pledged amount of money in the original 'currency'
+|	26	|	profile	|	dictionary with profile information: project id, state, state_changed_at (how is this different from the other state column? it def. is different) information about the project, pictures of the project
+|	27	|	slug	|	slug encoded into string without whitespace and .lower(), probably for url
+|	28	|	source_url	|	url to the project page
+|	29	|	spotlight	|	whether the project was spotlighted. WHAT'S THAT?
+|	30	|	staff_pick	|	whether the project was picked by the staff? picked for what? manually?
+|	31	|	state	|	['successful', 'failed', 'live', 'canceled', 'suspended']
+|	32	|	state_changed_at	|	last time the state changed
+|	33	|	static_usd_rate	|	some currency conversion rate between USD and 'currency'
+|	34	|	urls	|	another url to the project and a url to the rewards/pledge levels
+|	35	|	usd_pledged	|	pledged amount converted to USD using 'static_usd_rate'
+|	36	|	usd_type	|	international', 'domestic', nan
 
 ---
 ## Requirements and Environment
@@ -20,6 +54,14 @@ python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+```
+---
+## Data Merge
+
+The original raw data can be found in 'data/raw/' and is split up into 56 different *.csv files. You can run the following script to merge it and create a new 'kickstarter.csv' with all 209222 rows.
+
+```Bash
+python src/import.py
 ```
 
 ## Usage

@@ -55,4 +55,5 @@ def process_dataframe(input_df):
     df = df.drop(columns=dict_columns)
 
     # Return the processed DataFrame
+
     return df
