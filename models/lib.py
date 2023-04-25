@@ -22,15 +22,15 @@ def models():
         'RFC':  RandomForestClassifier(random_state=RSEED),
         'XGB':  XGBClassifier(seed=RSEED),
         'ABC':  AdaBoostClassifier(random_state=RSEED),
-        'KNN':  KNeighborsClassifier(),
         'LR':   LogisticRegression(random_state=RSEED),
 
-        # takes way too long to compute:
-        'SVC':  SVC(random_state=RSEED),
+        # # takes way too long to compute:
+        # 'SVC':  SVC(random_state=RSEED),
+        # 'KNN':  KNeighborsClassifier(),
 
-        # might try later
-        'MNB': MultinomialNB(),
-        'GNB': GaussianNB(),
+        # # might try later
+        # 'MNB': MultinomialNB(),
+        # 'GNB': GaussianNB(),
     }
     return model_dict
 
