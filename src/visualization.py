@@ -21,6 +21,7 @@ def nice_summary(df):
             .rename(columns={'index': 'Columns'}) \
             .replace({'Missing': 0, 'Missing %': 0}, '-')
 
+
 def nice_scores(y_train, y_predictions_dict):
 
     df = pd.DataFrame(columns=['FBeta', 'Accuracy', 'Recall', 'Precision'])
