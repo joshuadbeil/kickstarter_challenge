@@ -139,3 +139,4 @@ dmypy.json
 data/final
 data/processed
 data/raw/kickstarter.csv
+final_kickstarter.csv
