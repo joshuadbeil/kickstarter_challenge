@@ -6,7 +6,7 @@ import pickle
 import warnings
 warnings.filterwarnings('ignore')
 
-from feature_engineering import fill_missing_values, drop_column, transform_altitude
+#from feature_engineering import fill_missing_values, drop_column, transform_altitude
 
 # coffee data
 url="https://github.com/jldbc/coffee-quality-database/raw/master/data/robusta_data_cleaned.csv"
