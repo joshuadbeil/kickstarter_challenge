@@ -149,4 +149,5 @@ def json_cleaning(input_df, dict_columns):
     df = df.drop(columns=dict_columns)
 
     # Return the processed DataFrame
+
     return df
