@@ -1,11 +1,9 @@
 import sys
 import pandas as pd
 import pickle
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import accuracy_score, fbeta_score, recall_score, precision_score
 import warnings
 warnings.filterwarnings('ignore')
-
-from feature_engineering import fill_missing_values, drop_column, transform_altitude
 
 print('Number of arguments:', len(sys.argv), 'arguments.')
 print('Argument List:', str(sys.argv)) 
@@ -20,13 +18,13 @@ loaded_model = pickle.load(open(model, 'rb'))
 X_test = pd.read_csv(X_test_path)
 y_test = pd.read_csv(y_test_path)
 
-#feature eng on test data
-print("Feature engineering")
-X_test = transform_altitude(X_test)
-X_test = drop_column(X_test, col_name='Unnamed: 0')
-X_test = drop_column(X_test, col_name='Quakers')
-X_test = fill_missing_values(X_test)
+X_test['day_hour_launch'] = X_test['day_hour_launch'].astype(str)
+X_test['day_hour_deadline'] = X_test['day_hour_deadline'].astype(str)
 
 y_test_pred = loaded_model.predict(X_test)
-mse_test = mean_squared_error(y_test, y_test_pred)
-print (f"MSE on test is: {mse_test}")
+
+print("Accuracy score on the testing data: {:.4f}".format(accuracy_score(y_test, y_test_pred)))
+print("F-score on the testing data: {:.4f}".format(fbeta_score(y_test, y_test_pred, beta = 0.5)))
+print("Recall score on the testing data: {:.4f}".format(recall_score(y_test, y_test_pred)))
+print("Precision on the testing data: {:.4f}".format(precision_score(y_test, y_test_pred)))
+print("------\n")

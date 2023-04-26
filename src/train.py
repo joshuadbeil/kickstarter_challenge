@@ -1,7 +1,5 @@
 import sys
 import os
-sys.path.append('../')
-sys.path.append(os.path.abspath('../models'))
 
 import pandas as pd
 
@@ -11,10 +9,8 @@ from xgboost import XGBClassifier
 from sklearn.metrics import make_scorer, accuracy_score, fbeta_score, recall_score, precision_score
 from sklearn.metrics import classification_report, confusion_matrix
 
-import models.lib as modlib
-import src.process as process
-import src.cleaning as cleaning
-import src.visualization as vs
+import process as process
+import cleaning as cleaning
 
 import pickle
 
@@ -73,10 +69,6 @@ for model_name, predictions in pred_ytest_dict.items():
 #     print("------\n")
 
 # export data
-models_dir = os.path.join(os.path.dirname(__file__), '..', 'models')
-model_file = pd.read_csv(os.path.join(processed_dir, 'kickstarter_xgb.sav'))
-
-
-print("Saving model in the model folder")
-xgb = fitted_models_dict['scaledXGB']
-pickle.dump(xgb, open(model_file, 'wb'))
+save_model = fitted_models_dict['scaledXGB']
+filename = 'models/XGB_model.sav'
+pickle.dump(save_model, open(filename, 'wb'))
