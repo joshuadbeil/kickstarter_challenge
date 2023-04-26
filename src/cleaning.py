@@ -25,6 +25,7 @@ def convert_backers_pledged(df: pd.DataFrame) -> pd.DataFrame:
     """Create a new column for pledge per backer and drop backers_count afterwards"""
 
     df['pledge_per_backer'] = (df['usd_pledged'] / df['backers_count']).round(2)
+    df['pledge_per_backer'] = df['pledge_per_backer'].fillna(0)
     df['usd_pledged'] = df['usd_pledged'].round(2)
 
     df = df.drop(['backers_count'], axis =1)
@@ -60,9 +61,13 @@ def convert_times(df: pd.DataFrame) -> pd.DataFrame:
     df['launch_to_deadline'] = launch_to_deadline
     df['creation_to_launch'] = creation_to_launch
 
-    df['month'] = pd.to_datetime(df['launched_at'], unit='s').dt.month_name()
-    df['weekday'] = pd.to_datetime(df['launched_at'], unit='s').dt.day_name()
-    df['day_hour'] = pd.to_datetime(df['launched_at'], unit='s').dt.hour
+    df['month_launch'] = pd.to_datetime(df['launched_at'], unit='s').dt.month_name()
+    df['weekday_launch'] = pd.to_datetime(df['launched_at'], unit='s').dt.day_name()
+    df['day_hour_launch'] = pd.to_datetime(df['launched_at'], unit='s').dt.hour
+
+    df['month_deadline'] = pd.to_datetime(df['deadline'], unit='s').dt.month_name()
+    df['weekday_deadline'] = pd.to_datetime(df['deadline'], unit='s').dt.day_name()
+    df['day_hour_deadline'] = pd.to_datetime(df['deadline'], unit='s').dt.hour
 
     df = df.drop(['deadline', 'launched_at', 'created_at'], axis=1)
     return df

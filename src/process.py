@@ -117,11 +117,12 @@ def model_selection_search(X_train, y_train, model_dict, parameter_dict, search_
 def model_test_predict(X_train, X_test, y_train, model_dict):
 
     pred_ytest_dict = {}
+    fitted_models_dict = {}
     for model_name, model in model_dict.items():
         start_time = time.time()
-        model.fit(X_train, y_train)
+        fitted_models_dict[model_name] = model.fit(X_train, y_train)
         pred_ytest_dict[model_name] = model.predict(X_test)
         end_time = time.time()
         print(f"{model_name} - Time taken: {end_time - start_time:.2f} seconds")
 
-    return pred_ytest_dict
+    return pred_ytest_dict, fitted_models_dict

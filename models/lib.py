@@ -19,7 +19,7 @@ RSEED = 42
 def models():
     model_dict = {
         'DT':   DecisionTreeClassifier(random_state=RSEED),
-        'RFC':  RandomForestClassifier(random_state=RSEED),
+        # 'RFC':  RandomForestClassifier(random_state=RSEED),
         'XGB':  XGBClassifier(seed=RSEED),
         'ABC':  AdaBoostClassifier(random_state=RSEED),
         'LR':   LogisticRegression(random_state=RSEED),
