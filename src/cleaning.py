@@ -89,6 +89,11 @@ def drop_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop_duplicates('id', keep='first')
     return df
 
+def fill_na(df: pd.DataFrame) -> pd.DataFrame:
+    df['usd_type'] = df['usd_type'].fillna('international')
+    df['len_blurb'] = df['len_blurb'].fillna(df['len_blurb'].median())
+    return df
+
 
 def main():
 
@@ -96,6 +101,8 @@ def main():
     raw_dir = os.path.join(os.path.dirname(__file__), '..', 'data/raw')
     processed_dir = os.path.join(os.path.dirname(__file__), '..', 'data/processed')
     data = pd.read_csv(os.path.join(raw_dir, 'kickstarter.csv'))
+    print(f'Reading data from {raw_dir}')
+    print(f'Cleaning dataframe with shape: {data.shape}')
 
 
     # convert columns 
@@ -107,6 +114,7 @@ def main():
 
     data = convert_drop_labels(data)
     data = drop_duplicates(data)
+    data = fill_na(data)
 
     drop_these = [
         'converted_pledged_amount',
@@ -140,9 +148,11 @@ def main():
     data.drop(drop_these, axis=1, inplace=True)
     data.drop(drop_these_too, axis=1, inplace=True)
 
+    print(f'Dataframe shape after cleaning: {data.shape}')
 
     if not os.path.exists(processed_dir):
         os.makedirs(processed_dir)
+    print(f'Saving copy in {processed_dir}')
     data.to_csv(os.path.join(processed_dir, 'kickstarter_clean.csv'), index=False)
 
 

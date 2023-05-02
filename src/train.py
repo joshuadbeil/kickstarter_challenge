@@ -29,6 +29,12 @@ data['day_hour_launch'] = data['day_hour_launch'].astype(str)
 data['day_hour_deadline'] = data['day_hour_deadline'].astype(str)
 data = data.drop(['staff_pick','usd_pledged','pledge_per_backer'], axis=1)
 
+final_dir = os.path.join(os.path.dirname(__file__), '..', 'data/final')
+if not os.path.exists(final_dir):
+    os.makedirs(final_dir)
+print(f'Saving copy of final data before train/test-split in {final_dir}')
+data.to_csv(os.path.join(final_dir, 'kickstarter_final.csv'), index=False)
+
 
 # splitting into train and test set
 y = data['state']
